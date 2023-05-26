@@ -1,0 +1,141 @@
+<!-- THIS CODE USES ONLY 8 OF THE 11 ELEMENTS IN THE API ENDPOINT
+    BECAUSE IT IS BASED ON THE GRAPHICS OF THE PREVIOUS TASK1 WHICH HAD ONLY 8 POSITIONS-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Desktop 1 </title>
+        <link rel = "stylesheet" href="sample3.css">
+    </head>
+
+    <body>
+        <div class = "background">
+        <p class = "Rectangle_1"> </p>
+        <p class = "Rectangle_2"> </p>
+        <p class = "LeaderboardText"> Leaderboard </p>
+        <p class = "Line1"> </p></div>
+        <p class = "Rectangle number4" id = "number4"> 4 &emsp; &emsp; &emsp; &emsp; &emsp; Joe &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; 
+            &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; 445 </p>
+        <p class="Rectangle number5" id = "number5"> 5 &emsp; &emsp; &emsp; &emsp; &emsp; Jenny &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; 
+            &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &ensp; &ensp; 438 </p>
+        <p class = "Rectangle number6" id = "number6"> 6 &emsp; &emsp; &emsp; &emsp; &emsp; Josh &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; 
+            &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &ensp; 432</p>
+        <p class = "Rectangle number7" id = "number7"> 7 &emsp; &emsp; &emsp; &emsp; &emsp; Stella &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; 
+            &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &ensp; &ensp; 321</p>
+        <p class = "Rectangle number8" id = "number8"> 8 &emsp; &emsp; &emsp; &emsp; &emsp; Sally &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; 
+            &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &nbsp; 300 </p>
+
+        <p class = "Ellipse_1_1"> </p>
+        <p class = "Ellipse_1_2" id = "Ellipse_1_2"> </p>
+        <p class = "Ellipse_2_1"> </p>
+        <p class = "Ellipse_2_2" id = "Ellipse_2_2"> </p>
+        <p class = "Ellipse_3_1"> </p>
+        <p class = "Ellipse_3_2" id = "Ellipse_3_2"> </p>
+
+        <p class = "Ellipse text_1_4"> </p>
+        <p class = "Ellipse text_1_5"> </p>
+        <p class = "Ellipse text_1_6"> </p>
+        <p class = "Ellipse text_1_7"> </p>
+        <p class = "Ellipse text_1_8"> </p>
+
+        <p class = "Ellipse_2 text_2_4" id = "text_2_4"> </p>
+        <p class = "Ellipse_2 text_2_5" id = "text_2_5"> </p>
+        <p class = "Ellipse_2 text_2_6" id = "text_2_6"> </p>
+        <p class = "Ellipse_2 text_2_7" id = "text_2_7"> </p>
+        <p class = "Ellipse_2 text_2_8" id = "text_2_8"> </p>
+
+        <p class = "Rectangle_3" id = "Rectangle_3"> Amanda &nbsp; &middot; &nbsp; 764</p>
+        <p class = "Rectangle_4" id = "Rectangle_4"> Jeremy &middot; 672</p>
+        <p class = "Rectangle_5" id = "Rectangle_5"> Jefferey &middot; 542</p>
+
+        <p class = "Ellipse_3 no1"> 1 </p>
+        <p class = "Ellipse_3 no2"> 2 </p>
+        <p class = "Ellipse_3 no3"> 3 </p>
+        </div>
+
+        <script>
+            let name = [];
+            let points = [];
+            let avatar = [];
+
+            fetch("https://www.coursehubiitg.in/api/codingweek/contributions")
+                .then(response => response.json())
+              .then(json => name = json.map(obj => obj.name));
+            
+            fetch("https://www.coursehubiitg.in/api/codingweek/contributions")
+                .then(response1 => response1.json())
+              .then(json => points = json.map(obj => obj.points));
+            
+            fetch("https://www.coursehubiitg.in/api/codingweek/contributions")
+                .then(response2 => response2.json())
+              .then(json => avatar = json.map(obj => obj.avatar));
+            
+              async function fetchData(){
+                try{
+                    const response3 = await (fetch("https://www.coursehubiitg.in/api/codingweek/contributions")
+                    .then(response4 => response4.json())
+                    .then(json => name = json.map(obj => obj.name)))
+                    var indices = Array.from(points.keys());
+
+                    indices.sort(function(a,b){
+                        return points[b] - points[a];
+                    });
+
+                    name = indices.map(function(index) {
+                        return name[index];
+                    });
+
+                    points = indices.map(function(index) {
+                        return points[index];
+                    });
+
+                    avatar = indices.map(function(index) {
+                        return avatar[index];
+                    });
+
+                    console.log(name);
+                    console.log(points);
+                    console.log(avatar);
+            
+                    document.getElementById("Rectangle_3").innerHTML = name[0] + "&nbsp; &middot; &nbsp;" + points[0];
+                    document.getElementById("Rectangle_4").innerHTML = name[1] + "&nbsp; &middot; &nbsp;" + points[1];
+                    document.getElementById("Rectangle_5").innerHTML = name[2] + "&nbsp; &middot; &nbsp;" + points[2];
+                    document.getElementById("number4").innerHTML = "4 &emsp; &emsp; &emsp; &emsp; &emsp;" +name[3]+ "&emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &ensp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;" + points[3];
+                    document.getElementById("number5").innerHTML = "5 &emsp; &emsp; &emsp; &emsp; &emsp;" +name[4]+ "&emsp; &ensp; &nbsp; &nbsp; &emsp; &emsp; &emsp; &emsp; &ensp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;" + points[4];
+                    document.getElementById("number6").innerHTML = "6 &emsp; &emsp; &emsp; &emsp; &emsp;" +name[5]+ "&emsp; &emsp; &emsp; &emsp; &ensp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;" + points[5];
+                    document.getElementById("number7").innerHTML = "7 &emsp; &emsp; &emsp; &emsp; &emsp;" +name[6]+ "&emsp; &nbsp; &ensp; &emsp; &emsp; &emsp; &nbsp; &nbsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;" + points[6];
+                    document.getElementById("number8").innerHTML = "8 &emsp; &emsp; &emsp; &emsp; &emsp;" +name[7]+ "&emsp; &nbsp; &emsp; &emsp; &emsp; &ensp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;" + points[7];
+                    var image1 = document.createElement("img");
+                    image1.src = avatar[0];
+                    document.getElementById("Ellipse_1_2").appendChild(image1);
+                    var image2 = document.createElement("img");
+                    image2.src = avatar[1];
+                    document.getElementById("Ellipse_2_2").appendChild(image2);
+                    var image3 = document.createElement("img");
+                    image3.src = avatar[2];
+                    document.getElementById("Ellipse_3_2").appendChild(image3);
+                    var image4 = document.createElement("img");
+                    image4.src = avatar[3];
+                    document.getElementById("text_2_4").appendChild(image4);
+                    var image5 = document.createElement("img");
+                    image5.src = avatar[4];
+                    document.getElementById("text_2_5").appendChild(image5);
+                    var image6 = document.createElement("img");
+                    image6.src = avatar[5];
+                    document.getElementById("text_2_6").appendChild(image6);
+                    var image7 = document.createElement("img");
+                    image7.src = avatar[6];
+                    document.getElementById("text_2_7").appendChild(image7);
+                    var image8 = document.createElement("img");
+                    image8.src = avatar[7];
+                    document.getElementById("text_2_8").appendChild(image8);
+                }
+                catch(error){
+                console.error(error);}
+            
+            }
+            fetchData();
+            </script>
+            
+    </body>
+</html>
+        
